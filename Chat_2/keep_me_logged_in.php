@@ -1,4 +1,5 @@
 <php>
+
     function onLogin($user) {
     $token = GenerateRandomToken();    // generate a token, should be 128 - 256 bit
     storeTokenForUser($user, $token);
