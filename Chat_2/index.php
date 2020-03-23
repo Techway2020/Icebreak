@@ -4,6 +4,8 @@
 <head>
 <?php
 include('config.php');
+include('keep_me_logged_in');
+
 ?>
 <style>
 body {
