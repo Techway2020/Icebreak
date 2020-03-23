@@ -4,7 +4,28 @@
 <head>
 <?php
 include('config.php');
-include('keep_me_logged_in');
+if (isset($_POST["login"])){
+
+    $sql = "Select * from admin_login where admin_name = ' " . $_POST["username"] . " ' and admin_password = ' " .  $_POST["password"] . " ' ";
+    $result = mysqli_query($conn, $sql);
+    $user = mysqli_fetch_array($result);
+    if($user){
+        if(!empty($_POST["remember"])){
+            setcookie ("login",$name,time()+ (10 * 365 * 24 * 60 * 60));
+            setcookie ("password",$password,time()+ (10 * 365 * 24 * 60 * 60));
+            $_SESSION["admin_name"] = $name;
+        }
+        else{
+            if(isset($_COOKIE["login"])){
+                setcookie ("login","");
+            }
+            if(isset($_COOKIE["password"])){
+                setcookie ("password","");
+            }
+        }
+    }
+    }
+
 
 ?>
 <style>
@@ -114,9 +135,12 @@ $(document).ready(function(){
     <form action="check-login.php" method="post">
 	    <input type="text" placeholder="Username" id="username" name="username" class="username"/>
 	    <input type="password" placeholder="Password" id="password" name="password" class="password"/>
-	    <input type="submit" value="Log In" id="loginbutton" name="loginbutton" class="login"/>
+        <input type="checkbox" name="remember" ?> />
+        <label for="remember-me">Remember me</label>
+	    <input type="submit" value="Log In" id="loginbutton" name="login" class="login"/>
     </form>
     <p style="text-align:center; font-size:14px">Not registered ? <strong style="color:#ff656c" id="show" >Create an account</strong></p>
+
 </div>
 <div class="login-block register-box">
     <div class="logo">
