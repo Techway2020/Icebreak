@@ -5,7 +5,7 @@
 <?php
 include('config.php');
 
-if (isset($_POST["loginbutton"]) && isset($_POST['username']) && isset($_POST['password'])){
+if (isset($_POST["login"]) && isset($_POST['username']) && isset($_POST['password'])){
 
     $username=mysqli_real_escape_string($link, $_POST['username']);
     
@@ -22,7 +22,7 @@ if (isset($_POST["loginbutton"]) && isset($_POST['username']) && isset($_POST['p
 
 }
 	
-if (isset($_POST["loginbutton"])){
+if (isset($_POST["login"])){
 
     $sql = "Select * from admin_login where admin_name = ' " . $_POST["username"] . " ' and admin_password = ' " .  $_POST["password"] . " ' ";
     $result = mysqli_query($link, $sql);
